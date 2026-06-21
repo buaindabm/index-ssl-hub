@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>竞彩知识库 · 首页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fde9d9 0%, #f7d9c4 70%, #f2ceb5 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: system-ui, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            padding: 2rem 1rem;
+        }
+
+        .wrapper {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* 温柔目录感卡片 */
+        .hero-card {
+            background: rgba(255, 248, 240, 0.85);
+            backdrop-filter: blur(2px);
+            border-radius: 48px 48px 32px 32px;
+            padding: 2.5rem 2.2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 12px 28px rgba(160, 100, 60, 0.13);
+            transition: box-shadow 0.2s;
+        }
+
+        .hero-card h1 {
+            font-size: 2.4rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #5c3f2b;
+            margin-bottom: 0.6rem;
+            border-left: 6px solid #c08a64;
+            padding-left: 1rem;
+        }
+
+        .hero-card .subhead {
+            color: #7d5e45;
+            font-size: 1.05rem;
+            font-weight: 350;
+            line-height: 1.7;
+            max-width: 680px;
+        }
+
+        /* 网格：知识库入口感 */
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.6rem;
+            margin: 2rem 0 2.5rem;
+        }
+
+        .entry-card {
+            background: #fffcf9;
+            border-radius: 28px;
+            padding: 1.8rem 1.4rem 1.8rem 1.4rem;
+            box-shadow: 0 6px 14px rgba(130, 80, 45, 0.06);
+            transition: transform 0.15s, box-shadow 0.2s;
+            border: 1px solid rgba(230, 190, 160, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .entry-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 22px rgba(100, 60, 30, 0.10);
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            background: #f5e5d9;
+            width: 50px;
+            height: 50px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: #6b4d36;
+        }
+
+        .entry-card h3 {
+            font-weight: 500;
+            font-size: 1.25rem;
+            color: #4d3422;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.3px;
+        }
+
+        .entry-card p {
+            font-size: 0.95rem;
+            color: #6b5544;
+            line-height: 1.6;
+            flex: 1;
+            margin-bottom: 0.8rem;
+        }
+
+        .entry-card .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 0.6rem;
+            margin-top: 0.4rem;
+        }
+
+        .tag-list span {
+            background: #f2e3d8;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: #583e2b;
+            font-weight: 400;
+        }
+
+        .pill-link {
+            display: inline-block;
+            background: #e7d3c2;
+            color: #3d2b1d;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 450;
+            margin-top: 1rem;
+            align-self: flex-start;
+            transition: background 0.15s, color 0.15s;
+            border: 1px solid transparent;
+        }
+
+        .pill-link:hover {
+            background: #d8bdab;
+            color: #2d1e13;
+            border-color: #b8947a;
+        }
+
+        /* 说明＋提示 合并区域（卡片半透明） */
+        .insight-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin: 2rem 0 2.2rem;
+        }
+
+        .insight-box {
+            background: rgba(255, 248, 240, 0.7);
+            backdrop-filter: blur(2px);
+            flex: 1 1 260px;
+            padding: 1.8rem 1.6rem;
+            border-radius: 28px;
+            box-shadow: 0 4px 10px rgba(130, 80, 50, 0.05);
+        }
+
+        .insight-box h4 {
+            font-weight: 500;
+            color: #5c3f2b;
+            font-size: 1.15rem;
+            border-bottom: 2px dashed #daba9e;
+            padding-bottom: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .insight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .insight-box li {
+            margin-bottom: 0.7rem;
+            font-size: 0.98rem;
+            color: #4e3929;
+            line-height: 1.5;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .insight-box li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #b28262;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .soft-highlight {
+            background: #f3e4d8;
+            padding: 0.1rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        /* 相关信息区 */
+        .extra-info {
+            background: #fffcf9;
+            border-radius: 28px;
+            padding: 1.8rem 2rem;
+            margin-top: 1.2rem;
+            box-shadow: 0 6px 12px rgba(150, 100, 60, 0.06);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .extra-info .left {
+            color: #5c3f2b;
+        }
+
+        .extra-info .left p {
+            margin: 0.1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .extra-info .right {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.4rem;
+        }
+
+        .extra-info .right a {
+            color: #6f4d32;
+            text-decoration: underline wavy #caaa90 1.5px;
+            text-underline-offset: 5px;
+            font-weight: 400;
+            transition: color 0.1s;
+        }
+
+        .extra-info .right a:hover {
+            color: #3d2a1a;
+        }
+
+        .faq-mini {
+            background: rgba(255, 248, 240, 0.6);
+            border-radius: 28px;
+            padding: 1.4rem 1.8rem 1.8rem;
+            margin: 2.2rem 0 1.8rem;
+        }
+
+        .faq-mini h4 {
+            font-weight: 500;
+            color: #5c3f2b;
+            margin-bottom: 0.8rem;
+        }
+
+        .faq-item {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #eddaca;
+        }
+
+        .faq-item:last-child {
+            border-bottom: 0;
+        }
+
+        .faq-q {
+            font-weight: 460;
+            color: #4c3525;
+            flex: 0 0 100px;
+        }
+
+        .faq-a {
+            color: #6b5544;
+            flex: 1;
+        }
+
+        .faq-a a {
+            color: #6f4d32;
+            text-decoration: underline dotted #a67c5c;
+            font-weight: 400;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #7b624d;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            padding: 0.6rem 0;
+            opacity: 0.75;
+        }
+
+        @media (max-width: 600px) {
+            .hero-card h1 {
+                font-size: 1.9rem;
+                padding-left: 0.8rem;
+            }
+
+            .hero-card {
+                padding: 1.8rem 1.2rem;
+            }
+
+            .entry-card {
+                padding: 1.4rem 1rem;
+            }
+
+            .extra-info {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .faq-q {
+                flex: 0 0 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <!-- hero -->
+    <div class="hero-card">
+        <h1>📚 竞彩知识库</h1>
+        <div class="subhead">
+            日常查询 · 对照 · 延伸阅读 —— 围绕 <a href="https://index-ssl-jingcai.com" style="color:#6f4d32; text-decoration: underline dotted #b78b6a; font-weight:500;">中国竞彩网首页</a> 聚合赛事规则、术语简析与信息索引，让每次查阅都更顺手。
+        </div>
+    </div>
+
+    <!-- 目录感卡片网格：知识库入口 -->
+    <div class="knowledge-grid">
+        <div class="entry-card">
+            <div class="card-icon">📋</div>
+            <h3>常见场次对照</h3>
+            <p>联赛、杯赛、让球与过关场次一目了然，方便快速确认比赛范围与投注选项。</p>
+            <div class="tag-list">
+                <span>让球</span>
+                <span>胜平负</span>
+                <span>比分</span>
+            </div>
+            <a class="pill-link" href="https://index-ssl-jingcai.com">中国竞彩网首页</a>
+        </div>
+        <div class="entry-card">
+            <div class="card-icon">📖</div>
+            <h3>术语与规则简述</h3>
+            <p>从串关、M串N到奖金计算方式，整理竞猜常用名词，便于查阅与理解。</p>
+            <div class="tag-list">
+                <span>让球</span>
+                <span>单关</span>
+                <span>最高奖金</span>
+            </div>
+            <a class="pill-link" href="https://index-ssl-jingcai.com">中国竞彩网首页</a>
+        </div>
+        <div class="entry-card">
+            <div class="card-icon">📊</div>
+            <h3>延伸阅读索引</h3>
+            <p>赛事动态、统计数据、典型赛例 —— 为深入关注者提供背景资料方向。</p>
+            <div class="tag-list">
+                <span>球队</span>
+                <span>历史交锋</span>
+                <span>近况</span>
+            </div>
+            <a class="pill-link" href="https://index-ssl-jingcai.com">中国竞彩网首页</a>
+        </div>
+    </div>
+
+    <!-- 说明区 + 提示区 (insight area) -->
+    <div class="insight-area">
+        <div class="insight-box">
+            <h4>📌 查阅说明</h4>
+            <ul>
+                <li>页面信息均整理自公开竞彩规则与常见问答，适合赛前快速对照。</li>
+                <li>让球数值、赛程以官方发布为准，建议定期核对。</li>
+                <li>串关组合与奖金上限可参考官方计算器逻辑。</li>
+            </ul>
+        </div>
+        <div class="insight-box">
+            <h4>💡 日常提示</h4>
+            <ul>
+                <li>留意停售时间，避免错过投注窗口。</li>
+                <li>过关数较多时核对每场让球与选项。</li>
+                <li>如有规则变动请以 <a href="https://index-ssl-jingcai.com" style="color:#6f4d32; text-decoration: underline #b78b6a;">中国竞彩网首页</a> 最新公告为准。</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 相关信息区 -->
+    <div class="extra-info">
+        <div class="left">
+            <p>⚡ 相关信息</p>
+            <p style="font-size:0.85rem; color:#6b5544;">知识库版本 · 索引持续更新</p>
+        </div>
+        <div class="right">
+            <a href="https://index-ssl-jingcai.com">中国竞彩网首页</a>
+            <span style="color:#b28262;">·</span>
+            <a href="https://index-ssl-jingcai.com" style="text-decoration:none; border-bottom:1px dashed #b78b6a;">中国竞彩网首页</a>
+            <span style="color:#b28262;">·</span>
+            <a href="https://index-ssl-jingcai.com" style="text-decoration:none; border-bottom:1px dashed #b78b6a;">中国竞彩网首页</a>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-mini">
+        <h4>❓ 频繁查询摘录</h4>
+        <div class="faq-item">
+            <span class="faq-q">让球是什么？</span>
+            <span class="faq-a">为了平衡实力差，虚拟加减球数；具体数值以 <a href="https://index-ssl-jingcai.com">中国竞彩网首页</a> 公布为准。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">奖金上限？</span>
+            <span class="faq-a">通常单注最高奖金有限额，串关后理论奖金请参考官网计算说明。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">停售时间</span>
+            <span class="faq-a">一般比赛开赛前5–15分钟停止销售，具体见各场次倒计时。</span>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        温和提醒 · 竞猜有度 量力而行
+    </div>
+</div>
+</body>
+</html>
